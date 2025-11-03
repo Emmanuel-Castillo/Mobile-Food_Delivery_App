@@ -1,12 +1,17 @@
-import {Account, Avatars, Client, TablesDB, ID, Query} from "react-native-appwrite";
-import {CreateUserParams, SignInParams} from "@/type";
+import {Account, Avatars, Client, TablesDB, ID, Query, Storage} from "react-native-appwrite";
+import {CreateUserParams, GetMenuParams, SignInParams} from "@/type";
 
 export const appwriteConfig = {
     endpoint: process.env.EXPO_PUBLIC_APPWRITE_ENDPOINT!,
     projectId: process.env.EXPO_PUBLIC_APPWRITE_PROJECT_ID!,
     platform: "com.manny.food_delivery_app",
     databaseId: "69077276000e126afbd0",
-    userTableId: "user"
+    bucketId: "6908df1a003693edb62b",
+    userTableId: "user",
+    categoriesTableId: "categories",
+    menuTableId: "menu",
+    customizationsTableId: "customizations",
+    menuCustomizationsTableId: "menu_customizations",
 }
 
 export const client = new Client();
@@ -17,6 +22,7 @@ client.setEndpoint(appwriteConfig.endpoint)
 
 export const account = new Account(client);
 export const databases = new TablesDB(client);
+export const storage = new Storage(client);
 const avatars = new Avatars(client);
 
 export const createUser = async ({email, password, name}: CreateUserParams) => {
@@ -77,5 +83,40 @@ export const getCurrentUser = async () => {
     } catch (e) {
         console.log(e)
         throw new Error(e as string)
+    }
+}
+
+export const getMenu = async ({category, query}: GetMenuParams) => {
+    try {
+        const queries: string[] = [];
+
+        if (category) {
+            queries.push(Query.equal("categories", category));
+        }
+        if (query) {
+            queries.push(Query.search("name", query));
+        }
+        const menus = await databases.listRows({
+            databaseId: appwriteConfig.databaseId,
+            tableId: appwriteConfig.menuTableId,
+            queries: queries
+        })
+
+        return menus.rows
+    } catch (e) {
+        throw new Error(e as string)
+    }
+}
+
+export const getCatgories = async() => {
+    try {
+        const categories = await databases.listRows({
+            databaseId: appwriteConfig.databaseId,
+            tableId: appwriteConfig.categoriesTableId,
+        })
+
+        return categories.rows
+    } catch (e) {
+        throw  new Error(e as string)
     }
 }
