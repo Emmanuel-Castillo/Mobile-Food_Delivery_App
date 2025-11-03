@@ -7,8 +7,12 @@ import cn from "clsx"
 import {is} from "@babel/types";
 import ScrollView = Animated.ScrollView;
 import CartButton from "@/components/CartButton";
+import {useAuthStore} from "@/store/auth.store";
 
 export default function Index() {
+    const {user} = useAuthStore()
+
+    console.log("USER:", JSON.stringify(user, null, 2))
     return (
         <SafeAreaView className={"flex-1 bg-white"}>
             <FlatList data={offers} renderItem={({item, index}) => {
