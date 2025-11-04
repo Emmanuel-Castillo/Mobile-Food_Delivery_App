@@ -1,0 +1,18 @@
+name: Create Production Builds
+
+on:
+  push:
+    branches: ['main']
+
+jobs:
+  build_android_dev:
+    type: build # This job type creates a development build for Android
+    params:
+      platform: android
+      profile: development
+
+  build_android_preview:
+    type: build
+    params:
+      platform: android
+      profile: preview
