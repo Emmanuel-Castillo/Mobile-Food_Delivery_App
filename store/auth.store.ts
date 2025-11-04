@@ -12,6 +12,7 @@ type AuthState = {
     setIsLoading: (value: boolean) => void;
 
     fetchAuthenticatedUser: () => Promise<void>;
+    resetAuthenticatedUser: () => void;
 }
 
 export const useAuthStore = create<AuthState>((set) => ({
@@ -30,10 +31,15 @@ export const useAuthStore = create<AuthState>((set) => ({
             if (user) set({isAuthenticated: true, user: user as unknown as User})
             else set({isAuthenticated: false, user: null})
         } catch (e) {
-            console.error('fetchAuthenticatedUser error', e);
+            // console.error('fetchAuthenticatedUser error', e);
             set({isAuthenticated: false, user: null})
         } finally {
             set({isLoading: false});
         }
     },
+
+    resetAuthenticatedUser: () => {
+        set({user: null})
+        set({isAuthenticated: false})
+    }
 }))

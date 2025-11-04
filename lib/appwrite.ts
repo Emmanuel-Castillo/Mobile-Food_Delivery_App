@@ -1,5 +1,6 @@
 import {Account, Avatars, Client, TablesDB, ID, Query, Storage} from "react-native-appwrite";
 import {CreateUserParams, GetMenuParams, SignInParams} from "@/type";
+import {useAuthStore} from "@/store/auth.store";
 
 export const appwriteConfig = {
     endpoint: process.env.EXPO_PUBLIC_APPWRITE_ENDPOINT!,
@@ -60,6 +61,15 @@ export const signIn = async ({email, password}: SignInParams) => {
         const session = await account.createEmailPasswordSession({email, password});
     } catch (e) {
         throw new Error(e as string)
+    }
+}
+
+export const logOut = async () => {
+    try {
+        await account.deleteSessions()
+    }
+    catch (e) {
+        throw new Error(e as string);
     }
 }
 

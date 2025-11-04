@@ -4,10 +4,12 @@ import {Link, router} from 'expo-router'
 import CustomInput from "@/components/CustomInput";
 import CustomButton from "@/components/CustomButton";
 import { signIn } from '@/lib/appwrite';
+import {useAuthStore} from "@/store/auth.store";
 
 const SignIn = () => {
     const [isSubmitting, setIsSubmitting] = React.useState(false);
     const [form, setForm] = React.useState({email: '', password: ''});
+    const { fetchAuthenticatedUser } = useAuthStore()
 
     const submit = async () => {
         const {email, password} = form;
@@ -21,8 +23,7 @@ const SignIn = () => {
         try {
             // Call Appwrite Sign In function
             await signIn({email, password});
-
-            router.replace("/")
+            fetchAuthenticatedUser()
         } catch (error: any) {
             Alert.alert("Error", error.message)
         } finally {
