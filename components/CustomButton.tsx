@@ -8,6 +8,7 @@ const CustomButton = ({
                           title = "Click Me",
                           style,
                           textStyle,
+                          textColor,
                           leftIcon,
                           isLoading = false
                       }: CustomButtonProps) => {
@@ -18,7 +19,8 @@ const CustomButton = ({
                 {isLoading ? (
                     <ActivityIndicator size={"small"} color={"white"}/>
                 ) : (
-                    <Text className={cn("text-white-100 paragraph-semibold", textStyle)}>
+                    <Text
+                        className={cn("paragraph-semibold", textStyle, textColor ? `text-${textColor}` : "text-white")}>
                         {title}
                     </Text>
                 )}

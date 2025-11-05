@@ -62,7 +62,7 @@
     }
 
     .profile-field {
-        @apply flex flex-row items-center justify-start mb-4;
+        @apply flex flex-row items-center justify-start mb-6;
     }
 
     .profile-field__icon {
@@ -90,7 +90,7 @@
     }
 
     .profile-edit {
-        @apply flex items-center justify-center absolute bottom-2 right-0 bg-primary border-2 border-white size-7 p-2 rounded-full;
+        @apply flex items-center justify-center absolute bottom-2 right-0 bg-primary border-2 border-white size-10 p-2 rounded-full;
     }
 
     .h1-bold {
