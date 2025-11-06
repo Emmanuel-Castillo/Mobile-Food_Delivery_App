@@ -15,16 +15,18 @@ export default function RootLayout() {
         "Quicksand-Light": require('../assets/fonts/Quicksand-Light.ttf'),
     });
 
-    useEffect(() => {
+    // ✅ Load fonts first, THEN fetch user
+      useEffect(() => {
         if (error) throw error;
-        if (fontsLoaded) SplashScreen.hideAsync()
-    }, [fontsLoaded, error]);
+        if (fontsLoaded) {
+          fetchAuthenticatedUser().finally(() => {
+            SplashScreen.hideAsync();
+          });
+        }
+      }, [fontsLoaded, error]);
 
-    useEffect(() => {
-        fetchAuthenticatedUser()
-    }, []);
-
-    if (!fontsLoaded || isLoading) return null;
+      // Prevent rendering until fonts + user fetch complete
+      if (!fontsLoaded || isLoading) return null;
 
     return <Stack screenOptions={{headerShown: false}}/>;
 }
