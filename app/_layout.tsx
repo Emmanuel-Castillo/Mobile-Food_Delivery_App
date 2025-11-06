@@ -19,9 +19,9 @@ export default function RootLayout() {
       useEffect(() => {
         if (error) throw error;
         if (fontsLoaded) {
-          fetchAuthenticatedUser().finally(() => {
             SplashScreen.hideAsync();
-          });
+
+          fetchAuthenticatedUser()
         }
       }, [fontsLoaded, error]);
 
