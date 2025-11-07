@@ -38,7 +38,7 @@ const Cart = () => {
                         <View
                             className={"p-4 w-3/4 flex gap-4 items-center justify-end bg-primary/50 border border-primary rounded-3xl"}>
                             <Image source={images.bag}  resizeMode={"contain"}/>
-                            <Text className={"text-white"}>Your cart is empty.</Text>
+                            <Text className={"text-white w-full text-center"}>Your cart is empty.</Text>
                         </View>
                     </View>}
                     ListFooterComponent={() => totalItems > 0 && (

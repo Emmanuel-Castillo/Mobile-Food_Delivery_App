@@ -2,7 +2,7 @@ name: Create Production Builds
 
 on:
   push:
-    branches: ['main']
+    branches: ['master']
 
 jobs:
   build_android_dev:
@@ -10,9 +10,3 @@ jobs:
     params:
       platform: android
       profile: development
-
-  build_android_preview:
-    type: build
-    params:
-      platform: android
-      profile: preview

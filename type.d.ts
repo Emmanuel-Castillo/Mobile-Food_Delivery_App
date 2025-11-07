@@ -68,7 +68,6 @@ interface CustomButtonProps {
     style?: string;
     leftIcon?: React.ReactNode;
     textStyle?: string;
-    textColor?: string;
     isLoading?: boolean;
 }
 

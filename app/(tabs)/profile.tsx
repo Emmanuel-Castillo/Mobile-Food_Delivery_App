@@ -35,10 +35,10 @@ const Profile = () => {
                 </View>
 
                 <View className={"flex-col gap-2 w-full"}>
-                    <CustomButton title={"Edit Profile"} style={"bg-primary/50 border border-primary"} textColor={"primary"}
+                    <CustomButton title={"Edit Profile"} style={"bg-primary/30 border border-primary"} textStyle={"text-primary"}
                                   onPress={() => {
                                   }}/>
-                    <CustomButton title={"Logout"} style={"bg-red-100/50 border border-red-500"} textColor={"red-500"}
+                    <CustomButton title={"Logout"} style={"bg-red-100/50 border border-red-500"} textStyle={"text-red-500"}
                                   onPress={handleLogOutPress}
                                   leftIcon={<Image source={images.logout} className={"h-full w-6 mr-1"}
                                                    resizeMode={"contain"}/>}/>
